@@ -40,13 +40,13 @@
 	Member member = null;
 	if(rs.next()){
 		member = new Member();
-		member.memberId = rs.getString("memberId");
-		member.memberPw = rs.getString("memberPw");
+		member.setMemberId(rs.getString("memberId"));
+		member.setMemberPw(rs.getString("memberPw"));
 	}
 	
 	// 3. 출력(View)
 	// 디버깅 코드
-	System.out.println("수정할 비밀번호 : " + member.memberPw);
+	System.out.println("수정할 비밀번호 : " + member.getMemberPw());
 %>
 <!DOCTYPE html>
 <html>
@@ -96,7 +96,7 @@
 			<tr>
 				<td class="bg-success text-white">아이디</td>
 				<td>
-					<input type="text" name="memberId" value="<%=member.memberId%>" readonly="readonly">
+					<input type="text" name="memberId" value="<%=member.getMemberId()%>" readonly="readonly">
 				</td>
 			</tr>
 			<tr>

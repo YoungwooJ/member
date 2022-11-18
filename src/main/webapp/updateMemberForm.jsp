@@ -39,13 +39,13 @@
 	Member member = null;
 	if(rs.next()){
 		member = new Member();
-		member.memberId = rs.getString("memberId");
-		member.memberName = rs.getString("memberName");
+		member.setMemberId(rs.getString("memberId"));
+		member.setMemberName(rs.getString("memberName"));
 	}
 	
 	// 3. 출력(View)
 	// 디버깅 코드
-	System.out.println("수정할 이름 : " +member.memberName);
+	System.out.println("수정할 이름 : " + member.getMemberName());
 %>
 <!DOCTYPE html>
 <html>
@@ -95,13 +95,13 @@
 			<tr>
 				<td class="bg-success text-white">아이디</td>
 				<td>
-					<input type="text" name="memberId" value="<%=member.memberId%>" readonly="readonly">
+					<input type="text" name="memberId" value="<%=member.getMemberId()%>" readonly="readonly">
 				</td>
 			</tr>
 			<tr>
 				<td class="bg-success text-white">기존 닉네임</td>
 				<td>
-					<input type="text" name="memberName" value="<%=member.memberName%>" readonly="readonly">
+					<input type="text" name="memberName" value="<%=member.getMemberName()%>" readonly="readonly">
 				</td>
 			</tr>
 			<tr>

@@ -22,10 +22,10 @@
 	}
 	
 	Member member	= new Member();
-	member.memberId	= request.getParameter("memberId");
-	member.memberPw	= request.getParameter("memberPw");
-	System.out.print(member.memberId + " <--- ID");
-	System.out.print(member.memberPw + " <--- PW");
+	member.setMemberId(memberId);
+	member.setMemberPw(memberPw);
+	System.out.print(member.getMemberId() + " <--- ID");
+	System.out.print(member.getMemberPw() + " <--- PW");
 	
 	// 2
 	String driver	= "org.mariadb.jdbc.Driver";
@@ -38,8 +38,8 @@
 	
 	String sql = "DELETE FROM member WHERE member_id=? AND member_pw=PASSWORD(?)";
 	PreparedStatement stmt = conn.prepareStatement(sql);
-	stmt.setString(1, member.memberId);
-	stmt.setString(2, member.memberPw);
+	stmt.setString(1, member.getMemberId());
+	stmt.setString(2, member.getMemberPw());
 	int row = stmt.executeUpdate();
 	
 	

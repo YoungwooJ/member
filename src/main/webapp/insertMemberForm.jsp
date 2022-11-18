@@ -69,7 +69,31 @@
 					<td><input type="password" name="memberPw"></td> <!-- 비밀번호 확인 -->
 				</tr>
 				<tr>
+					<td>사원번호</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
 					<td>이름</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
+					<td>성</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
+					<td>출생일</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td><input type="text" name="memberName"></td>
+				</tr>
+				<tr>
+					<td>입사일</td>
 					<td><input type="text" name="memberName"></td>
 				</tr>
 			</table>

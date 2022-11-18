@@ -4,6 +4,13 @@
 <%@ page import="java.net.URLEncoder" %>
 <%
 	//1. 요청 분석 (Controller)
+	// 로그인이 되어 있을 때는 접근 불가
+	if(session.getAttribute("loginMemberId") != null){
+		// 로그인이 되어 있는 상태
+		response.sendRedirect(request.getContextPath()+"/memberIndex.jsp");
+		return;
+	}
+	
 	request.setCharacterEncoding("UTF-8");
 	
 	//안전 장치 코드
@@ -16,15 +23,15 @@
 		return;
 	}
 	
-	/*
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw");
-	*/
+	
+	// VO setter 호출
 	Member member	= new Member();
-	member.memberId	= request.getParameter("memberId");
-	member.memberPw	= request.getParameter("memberPw");
-	System.out.print(member.memberId + " <--- ID");
-	System.out.print(member.memberPw + " <--- PW");
+	member.setMemberId(memberId);
+	member.setMemberPw(memberPw);
+	System.out.print(member.getMemberId() + " <--- ID");
+	System.out.print(member.getMemberPw() + " <--- PW");
 	
 	// 2
 	// db연결
@@ -44,17 +51,26 @@
 	// 쿼리
 	String sql = "SELECT member_id memberId FROM member WHERE member_id=? AND member_pw=PASSWORD(?)";
 	PreparedStatement stmt = conn.prepareStatement(sql);
-	stmt.setString(1, member.memberId);
-	stmt.setString(2, member.memberPw);
+	stmt.setString(1, member.getMemberId());
+	stmt.setString(2, member.getMemberPw());
 	ResultSet rs = stmt.executeQuery();
 	
-	String targetPage = "/loginForm.jsp";
+	String targetUrl = "/loginForm.jsp";
 	
 	if(rs.next()) {
 		// 로그인 성공
 		System.out.println("success");
-		targetPage = "/memberIndex.jsp";
+		Member loginEmp = new Member(); 
+		loginEmp.setMemberId(rs.getString("memberId"));
+		loginEmp.setMemberPw(rs.getString("memberPw"));
+		loginEmp.setEmpNo(rs.getInt("empNo"));
+		loginEmp.setBirthDate(rs.getString("birthDate"));
+		loginEmp.setFirstName(rs.getString("firstName"));
+		loginEmp.setLastName(rs.getString("lastName"));
+		loginEmp.setGender(rs.getString("gender"));
+		loginEmp.setHireDate(rs.getString("hireDate"));
 		// 로그인 성공했다는 값을 저장 -> session 
+		targetUrl = "/memberIndex.jsp";
 		session.setAttribute("loginMemberId", rs.getString("memberId")); 
 		// Object loginMemberId = rs.getString("memberId"); // 다형성 + 연산자 오버로딩
 		// Object 타입을 대입할 떄는 상관 없지만 가져올 때는 형변환 필수, 다형성 -> 상속이 되야 한다 -> 참조타입을 만드려면 추상화 / 캡슐
@@ -63,5 +79,6 @@
 	rs.close();
 	stmt.close();
 	conn.close();
-	response.sendRedirect(request.getContextPath()+targetPage);
+	response.sendRedirect(request.getContextPath()+targetUrl);
+	// 3. View
 %>

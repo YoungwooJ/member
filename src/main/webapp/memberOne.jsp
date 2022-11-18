@@ -30,9 +30,9 @@
 	Member member = null;
 	if(rs.next()){
 		member = new Member();
-		member.memberId = rs.getString("memberId");
-		member.memberPw = rs.getString("memberPw");
-		member.memberName = rs.getString("memberName");
+		member.setMemberId(rs.getString("memberId"));
+		member.setMemberPw(rs.getString("memberPw"));
+		member.setMemberName(rs.getString("memberName"));
 	}
  %>
 <!DOCTYPE html>
@@ -82,24 +82,24 @@
 	<table class="table">
 		<tr>
 			<td>회원아이디</td>
-			<td><%=member.memberId%></td>
+			<td><%=member.getMemberId()%></td>
 		</tr>
 		<tr>
 			<td>회원이름</td>
-			<td><%=member.memberName%></td>
+			<td><%=member.getMemberName()%></td>
 		</tr>
 	</table>
 	<br><br>
 	<div>
-		<a style="float: left;" type="button" class="btn btn-white btn-outline-info" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp?memberId=<%=member.memberId%>">비밀번호수정</a>
+		<a style="float: left;" type="button" class="btn btn-white btn-outline-info" href="<%=request.getContextPath()%>/updateMemberPwForm.jsp?memberId=<%=member.getMemberId()%>">비밀번호수정</a>
 		<!-- updateMemberPwAction.jsp 수정 전 비밀번호, 변경할 비밀번호를 입력받아야 함-->
 	</div>
 	<div>
-		<a style="float: left;" type="button" class="btn btn-white btn-outline-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp?memberId=<%=member.memberId%>">개인정보수정</a>
+		<a style="float: left;" type="button" class="btn btn-white btn-outline-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp?memberId=<%=member.getMemberId()%>">개인정보수정</a>
 		<!-- updateMemberAction.jsp 비밀번호 수정은 안됨-->
 	</div>
 	<div>
-		<a style="float: right;" type="button" class="btn btn-white btn-outline-danger" href="<%=request.getContextPath()%>/deleteMemberForm.jsp?memberId=<%=member.memberId%>">회원탈퇴</a>
+		<a style="float: right;" type="button" class="btn btn-white btn-outline-danger" href="<%=request.getContextPath()%>/deleteMemberForm.jsp?memberId=<%=member.getMemberId()%>">회원탈퇴</a>
 		<!-- deleteMemberAction.jsp 비밀번호 확인 후 삭제 session.invalidate()-->
 	</div>
 </body>

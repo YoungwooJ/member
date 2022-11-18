@@ -8,6 +8,8 @@
 		return;
 	}
 	String loginMemberId = (String)(session.getAttribute("loginMemberId"));
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +44,10 @@
 	</style>
 </head>
 <body class="container text-center">
+	<!-- 메뉴 partial jsp 구성 -->
+	<div>
+		<jsp:include page="/inc/menu.jsp"></jsp:include>
+	</div>
 	<h2 class="p-3 bg-success text-white rounded">회원 정보</h2>
 	<div>
 		<div class="alert alert-primary" role="alert"><%=loginMemberId%>님 반갑습니다.</div>
